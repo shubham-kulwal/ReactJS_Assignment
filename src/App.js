@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person'
+import { green } from 'ansi-colors';
 
 const App = props => {
 
@@ -57,12 +58,29 @@ const App = props => {
       persons:person
       })
    }
+
+   const style ={
+     backgroundColor:'green',
+     padding:'8px',
+     color:'white',
+     border:'1px solid blue',
+     font:'inherit'
+   }
+   const classes = []
+   
+    if(personState.persons.length <= 2){
+      classes.push('red')
+    }
  
+    if(personState.persons.length <= 1){
+     classes.push('bold')
+    }
+   
     return (
       <div className="App">
        <h1>Hi I'm a react app</h1>
-       <p>This is really working</p>
-       <button onClick={togglePersonsHandler}>Toggle Persons</button>
+       <p className={ classes.join(' ')}>This is really working</p>
+       <button style ={style} onClick={togglePersonsHandler}>Toggle Persons</button>
        { personState.showPersons ?
        <div>
        {personState.persons.map((person,index) => {
